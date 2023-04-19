@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Todos a la u</h1>
+    <div class="container"></div>
+    <div class="container unauthenticated">
+        <a href="/oauth2/authorization/github">Iniciar con git</a>
+    </div>
+
+    <div class="container authenticated">
+        Logged in as: <span id="user"></span>
+        <div>
+            <button onClick="logout()" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        var logout = function() {
+            var requestOptions = {
+              method: 'POST',
+              redirect: 'follow'
+            };
+
+            fetch("/logout", requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
+        }
+    </script>
+
+</body>
+</html>
